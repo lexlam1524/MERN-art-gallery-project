@@ -2,8 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
+import artistRoutes from './routes/artist.routes.js';
+import artifactRoutes from './routes/artifact.routes.js';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+
+
 dotenv.config();
 
 
