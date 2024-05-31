@@ -28,6 +28,9 @@ export default function Header() {
           <Link to="/artists">
             <li>Artists</li>
           </Link>
+          <Link to="/artifacts">
+            <li>Artifacts</li>
+          </Link>
           {currentUser ? (
             <>
               <Link to="/profile">

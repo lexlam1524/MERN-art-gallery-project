@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import ArtistList from '../components/ArtistList';
 import AddArtifactForm from '../components/AddArtifactForm';
+import AddArtistForm from '../components/AddArtistFrom';
 
 export default function Artists() {
-  const [newArtifact, setNewArtifact] = useState(null);
+  const [newArtist, setNewArtist] = useState(null);
 
-  const handleArtifactAdded = artifact => {
-    setNewArtifact(artifact);
+  const handleArtistAdded = artifact => {
+    setNewArtist(artifact);
   };
 
   return (
     <div>
-      <h1>Artists</h1>
-      <ArtistList />
-      <h2>Add New Artifact</h2>
-      <AddArtifactForm onArtifactAdded={handleArtifactAdded} />
+      <h2>Add New Artists</h2>
+      <AddArtistForm onArtifactAdded={handleArtistAdded} />
     </div>
   );
 }

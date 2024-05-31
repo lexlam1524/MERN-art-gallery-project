@@ -1,11 +1,19 @@
-import React from 'react';
-import ArtifactList from '../components/ArtifactList';
+import React, { useState } from 'react';
+import ArtistList from '../components/ArtistList';
+import AddArtifactForm from '../components/AddArtifactForm';
+import AddArtistForm from '../components/AddArtistFrom';
 
 export default function Artifacts() {
+  const [newArtifact, setNewArtifact] = useState(null);
+
+  const handleArtifactAdded = artifact => {
+    setNewArtifact(artifact);
+  };
+
   return (
     <div>
-      <h1>Artifacts</h1>
-      <ArtifactList />
+      <h2>Add New Artifact</h2>
+      <AddArtifactForm onArtifactAdded={handleArtifactAdded} />
     </div>
   );
 }

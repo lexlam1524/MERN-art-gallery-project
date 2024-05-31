@@ -24,17 +24,16 @@ export default function ArtifactList({ artistId }) {
   }, [artistId]);
 
   return (
-    <div>
-      <ul>
-        {artifacts.map((artifact) => (
-          <li key={artifact._id}>
-            <img src={artifact.imageUrl} alt={artifact.title} />
+    <div className="card-container">
+      {artifacts.map((artifact) => (
+        <li key={artifact._id} className="card">
+          <img src={artifact.imageUrl} alt={artifact.title} />
+          <div className="card-content">
             <h3>{artifact.title}</h3>
             <p>{artifact.description}</p>
-            <p>Artist: {artifact.artist ? artifact.artist.name : "Unknown"}</p>
-          </li>
-        ))}
-      </ul>
+          </div>
+        </li>
+      ))}
     </div>
   );
 }
