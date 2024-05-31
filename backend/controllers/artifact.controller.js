@@ -1,6 +1,25 @@
 import Artifact from '../model/artifact.js';
 import { errorHandler } from '../utils/error.js';
 
+
+
+/**
+ * POST /artifacts
+ * Creates a new artifact.
+ * 
+ * Request Body:
+ * {
+ *  "title": String (required),
+ *  "description": String (optional),
+ *  "imageUrl": String (optional),
+ *  "artist": String (required)
+ * }
+ * 
+ * Response:
+ * 201 Created: Artifact created successfully.
+ * 400 Bad Request: Invalid request data.
+ */
+
 export const createArtifact = async (req, res, next) => {
   const { title, description, imageUrl, artist } = req.body;
   try {
@@ -12,6 +31,14 @@ export const createArtifact = async (req, res, next) => {
   }
 };
 
+/**
+ * GET /artifacts
+ * Retrieves a list of all artifacts.
+ * 
+ * Response:
+ * 200 OK: List of artifacts returned successfully.
+ * 500 Internal Server Error: Error fetching artifacts.
+ */
 export const getArtifacts = async (req, res, next) => {
   try {
     const artifacts = await Artifact.find().populate('artist');
@@ -21,6 +48,18 @@ export const getArtifacts = async (req, res, next) => {
   }
 };
 
+
+/**
+ * GET /artifacts/:id
+ * Retrieves a single artifact by ID.
+ * 
+ * Path Parameters:
+ *  "id": String (required)
+ * 
+ * Response:
+ * 200 OK: Artifact returned successfully.
+ * 404 Not Found: Artifact not found.
+ */
 export const getArtifactById = async (req, res, next) => {
   try {
     const artifact = await Artifact.findById(req.params.id).populate('artist');
@@ -31,6 +70,26 @@ export const getArtifactById = async (req, res, next) => {
   }
 };
 
+
+/**
+ * PUT /artifacts/:id
+ * Updates a single artifact by ID.
+ * 
+ * Path Parameters:
+ *  "id": String (required)
+ * 
+ * Request Body:
+ * {
+ *  "title": String (optional),
+ *  "description": String (optional),
+ *  "imageUrl": String (optional),
+ *  "artist": String (optional)
+ * }
+ * 
+ * Response:
+ * 200 OK: Artifact updated successfully.
+ * 404 Not Found: Artifact not found.
+ */
 export const updateArtifact = async (req, res, next) => {
   try {
     const updatedArtifact = await Artifact.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -41,6 +100,18 @@ export const updateArtifact = async (req, res, next) => {
   }
 };
 
+
+/**
+ * DELETE /artifacts/:id
+ * Deletes a single artifact by ID.
+ * 
+ * Path Parameters:
+ *  "id": String (required)
+ * 
+ * Response:
+ * 200 OK: Artifact deleted successfully.
+ * 404 Not Found: Artifact not found.
+ */
 export const deleteArtifact = async (req, res, next) => {
   try {
     const deletedArtifact = await Artifact.findByIdAndDelete(req.params.id);

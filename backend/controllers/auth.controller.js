@@ -3,6 +3,24 @@ import bcryptjs from "bcryptjs";
 import { errorHandler } from '../utils/error.js';
 import jwt from 'jsonwebtoken';
 
+
+/**
+ * POST /auth/signup
+ * Creates a new user account.
+ * 
+ * Request Body:
+ * {
+ *  "username": String (required),
+ *  "email": String (required),
+ *  "password": String (required),
+ *  "profilePicture": String (optional)
+ * }
+ * 
+ * Response:
+ * 201 Created: User account created successfully.
+ * 400 Bad Request: Invalid request data.
+ */
+
 export const signup = async(req,res,next)=>{
    const {username,email,password} = req.body;
    const hashedPassword = bcryptjs.hashSync(password,10);
@@ -16,6 +34,21 @@ export const signup = async(req,res,next)=>{
   
 };
 
+
+/**
+ * POST /auth/signin
+ * Authenticates a user and returns a JWT token.
+ * 
+ * Request Body:
+ * {
+ *  "email": String (required),
+ *  "password": String (required)
+ * }
+ * 
+ * Response:
+ * 200 OK: JWT token returned successfully.
+ * 401 Unauthorized: Invalid credentials.
+ */
 export const signin = async(req, res, next)=>{
    const{email, password} = req.body;
    try{
@@ -36,6 +69,19 @@ export const signin = async(req, res, next)=>{
    }
 };
 
+/**
+ * POST /auth/google
+ * Authenticates a user using Google OAuth.
+ * 
+ * Request Body:
+ * {
+ *  "tokenId": String (required)
+ * }
+ * 
+ * Response:
+ * 200 OK: JWT token returned successfully.
+ * 401 Unauthorized: Invalid credentials.
+ */
 export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -80,6 +126,15 @@ export const google = async (req, res, next) => {
   }
 };
 
+
+
+/**
+ * GET /auth/signout
+ * Signs out the current user.
+ * 
+ * Response:
+ * 200 OK: User signed out successfully.
+ */
 export const signout = (req, res) => {
    res.clearCookie('access_token').status(200).json('Signout success!');
  };

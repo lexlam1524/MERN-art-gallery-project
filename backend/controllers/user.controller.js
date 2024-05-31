@@ -4,7 +4,14 @@ import bcryptjs from 'bcryptjs';
 
 
 
-//get
+/**
+ * GET /users
+ * Retrieves a list of all users.
+ * 
+ * Response:
+ * 200 OK: List of users returned successfully.
+ * 500 Internal Server Error: Error fetching users.
+ */
 export const getUsers = async (req, res, next) => {
   try {
     const users = await User.find({});
@@ -18,7 +25,25 @@ export const getUsers = async (req, res, next) => {
   }
 };
 
-// update user
+/**
+ * PUT /users/:id
+ * Updates a single user by ID.
+ * 
+ * Path Parameters:
+ *  "id": String (required)
+ * 
+ * Request Body:
+ * {
+ *  "username": String (optional),
+ *  "email": String (optional),
+ *  "password": String (optional),
+ *  "profilePicture": String (optional)
+ * }
+ * 
+ * Response:
+ * 200 OK: User updated successfully.
+ * 404 Not Found: User not found.
+ */
 
 export const updateUser = async (req, res, next) => {
   if (req.user.id !== req.params.id) {
@@ -49,7 +74,17 @@ export const updateUser = async (req, res, next) => {
 };
 
 
-// delete user
+/**
+ * DELETE /users/:id
+ * Deletes a single user by ID.
+ * 
+ * Path Parameters:
+ *  "id": String (required)
+ * 
+ * Response:
+ * 200 OK: User deleted successfully.
+ * 404 Not Found: User not found.
+ */
 
 
 export const deleteUser = async (req, res, next) => {
