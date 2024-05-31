@@ -30,6 +30,8 @@ app.use(cookieParser());
 
 app.use('/api/user',userRoutes);
 app.use('/api/auth',authRoutes);
+app.use('/api/artists', artistRoutes);
+app.use('/api/artifacts', artifactRoutes);
 
 app.use((err,req,res,next)=>{
     const statusCode = err.statusCode || 500;

@@ -19,7 +19,6 @@ export default function ArtistList() {
 
   return (
     <div>
-      <h2>Artists</h2>
       <ul>
         {artists.map(artist => (
           <li key={artist._id}>
