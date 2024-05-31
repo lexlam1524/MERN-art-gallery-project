@@ -2,10 +2,20 @@ import User from '../model/user.js';
 import { errorHandler } from '../utils/error.js';
 import bcryptjs from 'bcryptjs';
 
-export const test = (req, res) => {
-  res.json({
-    message: 'API is working!',
-  });
+
+
+//get
+export const getUsers = async (req, res, next) => {
+  try {
+    const users = await User.find({});
+    const usersWithoutPassword = users.map(user => {
+      const { password, ...rest } = user._doc;
+      return rest;
+    });
+    res.status(200).json(usersWithoutPassword);
+  } catch (error) {
+    next(error);
+  }
 };
 
 // update user
